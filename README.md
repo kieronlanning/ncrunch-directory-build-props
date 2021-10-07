@@ -1,6 +1,6 @@
 # Outline
 
-A constrain example of dynamically including project and content using MSBuild Directory.Build.* files to adhere to project naming conventions.
+A constrained example of dynamically including project and content using MSBuild Directory.Build.* files to adhere to project naming conventions.
 
 When a C# project is created, and it has matching Unit, Integration or Environment test projects the source project (being testing) and a shared testing project is included.
 
