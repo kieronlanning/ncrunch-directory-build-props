@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup Label="NuGet Package Defaults">
+    <Authors>KJL Solutions Ltd.</Authors>
+    <PackageProjectUrl>https://kjl.dev/</PackageProjectUrl>
+  </PropertyGroup>
+</Project>

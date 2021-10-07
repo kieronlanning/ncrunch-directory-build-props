@@ -1,0 +1,55 @@
+<Project>
+
+  <PropertyGroup Label="Define C# Properties" Condition="'$(MSBuildProjectExtension)' == '.csproj'">
+    <IsCSharpProject>true</IsCSharpProject>
+    <_CsProjContent>$([System.IO.File]::ReadAllText(`$(MSBuildProjectFullPath)`))</_CsProjContent>
+  </PropertyGroup>
+
+  <!-- Get the Project Sdk details. -->
+  <PropertyGroup Label="Define C# SDK Project Properties" Condition="'$(_CsProjContent)' != ''">
+    <IsSdkProject>$([System.Text.RegularExpressions.Regex]::IsMatch(`$(_CsProjContent))`, `(?s-i)(?:^|\s|>)(?s-i)(?:^|\s|&gt;)&lt;\s*(?:Project|Import)\s(?:[^&gt;]*?)\s?Sdk\s*=&quot;(?&lt;sdkproj&gt;.*?)&quot;`))</IsSdkProject>
+    <SdkProjectName>$([System.Text.RegularExpressions.Regex]::Match(`$(_CsProjContent))`, `(?s-i)(?:^|\s|>)(?s-i)(?:^|\s|&gt;)&lt;\s*(?:Project|Import)\s(?:[^&gt;]*?)\s?Sdk\s*=&quot;(?&lt;sdkproj&gt;.*?)&quot;`).Groups['sdkproj'].Value)</SdkProjectName>
+  </PropertyGroup>
+
+  <!-- If it's a Web SDK project or not, then set the property. -->
+  <PropertyGroup Label="Define C# Web-SDK Project Properties" >
+    <IsWebSdkProject Condition="'$(SdkProjectName)' == 'Microsoft.NET.Sdk.Web'">true</IsWebSdkProject>
+    <IsWebSdkProject Condition="'$(IsSdkProject)' != 'true' OR '$(SdkProjectName)' == 'Microsoft.NET.Sdk'">false</IsWebSdkProject>
+  </PropertyGroup>
+
+  <!-- Add build properties director variable. -->
+  <PropertyGroup Label="Define C# MS-Build Properties" Condition="'$(IsCSharpProject)' == 'true'">
+    <_CsProjContent>$([System.IO.File]::ReadAllText(`$(MSBuildProjectFullPath)`))</_CsProjContent>
+    <AutoMSBuildProps>$([System.IO.Path]::Combine('$(MSBuildThisFileDirectory)', '.\Properties'))</AutoMSBuildProps>
+  </PropertyGroup>
+
+  <!-- Determine if it's a unit test project. -->
+  <PropertyGroup Label="C# Unit Test Properties" Condition="'$(IsCSharpProject)' == 'true' AND $(MSBuildProjectName.EndsWith('.UnitTests'))">
+    <IsTestProject>true</IsTestProject>
+    <IsUnitTestProject>true</IsUnitTestProject>
+    <ReferenceProjectName>$(MSBuildProjectName.Replace('.UnitTests', ''))</ReferenceProjectName>
+    <RootNamespace>$(MSBuildProjectName.Replace('.Core.UnitTests', '').Replace('.UnitTests', ''))</RootNamespace>
+  </PropertyGroup>
+
+  <!-- Determine if it's a integration test project. -->
+  <PropertyGroup Label="C# Integration Test Properties" Condition="'$(IsCSharpProject)' == 'true' AND $(MSBuildProjectName.EndsWith('.IntegrationTests'))">
+    <IsTestProject>true</IsTestProject>
+    <IsIntegrationTestProject>true</IsIntegrationTestProject>
+    <ReferenceProjectName>$(MSBuildProjectName.Replace('.IntegrationTests', ''))</ReferenceProjectName>
+    <RootNamespace>$(MSBuildProjectName.Replace('.Core.IntegrationTests', '').Replace('.IntegrationTests', ''))</RootNamespace>
+  </PropertyGroup>
+
+  <!-- Determine if it's a environment test project. -->
+  <PropertyGroup Label="C# Environment Test Properties" Condition="'$(IsCSharpProject)' == 'true' AND $(MSBuildProjectName.EndsWith('.EnvironmentTests'))">
+    <IsTestProject>true</IsTestProject>
+    <IsEnvironmentTestProject>true</IsEnvironmentTestProject>
+    <ReferenceProjectName>$(MSBuildProjectName.Replace('.EnvironmentTests', ''))</ReferenceProjectName>
+    <RootNamespace>$(MSBuildProjectName.Replace('.Core.EnvironmentTests', '').Replace('.EnvironmentTests', ''))</RootNamespace>
+  </PropertyGroup>
+
+  <!-- Update the root namespace with no .Core. -->
+  <PropertyGroup Label="C# Project Namespace Properties" Condition="'$(IsCSharpProject)' == 'true' AND $(MSBuildProjectName.EndsWith('.Core'))">
+    <RootNamespace>$(MSBuildProjectName.Replace('.Core', ''))</RootNamespace>
+  </PropertyGroup>
+
+</Project>

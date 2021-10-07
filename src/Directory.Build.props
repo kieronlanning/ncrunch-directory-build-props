@@ -1,0 +1,77 @@
+<Project>
+
+  <Import Project="./.build/msbuild/variables.props"/>
+  <Import Project="./.build/msbuild/nuget-packable-default.props"/>  
+
+  <!-- All C# Projects -->
+  <PropertyGroup Label="C# Project Property Groups" Condition="'$(IsCSharpProject)' == 'true'">
+    <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <TargetFramework>net5.0</TargetFramework>
+    <Deterministic>true</Deterministic>
+    <ContinousIntegrationBuild>true</ContinousIntegrationBuild>
+
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <AnalysisLevel>5</AnalysisLevel>
+
+    <!-- Warnigns to disable -->
+    <NoWarn>IDE0011;$(NoWarn)</NoWarn>
+    <NoWarn>CA1014;CA1848;CA2201;CA2234;CA2225;CA2254;$(NoWarn)</NoWarn>
+    <NoWarn>CS1591;$(NoWarn)</NoWarn>
+    <NoWarn>RCS1090;RCS1108;$(NoWarn)</NoWarn>
+
+    <!-- It's included via a shared single file. -->
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+  </PropertyGroup>
+
+  <ItemGroup Label="C# Project Item Groups" Condition="'$(IsCSharpProject)' == 'true'">
+    <!-- Embedded Resources -->
+    <None Remove="Resources\**\*" />
+    <EmbeddedResource Include="Resources\**\*" />
+  </ItemGroup>
+
+  <ItemGroup Label="Dynamic Versioning" Condition="'$(IsCSharpProject)' == 'true'">
+    <Compile Include="$([System.IO.Path]::Combine('$(AutoMSBuildProps)', 'AssemblyInfo_Shared.cs'))" Link="Properties\SharedAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <!-- Test Projects. -->
+  <PropertyGroup Label="Testing Project Properties" Condition="'$(IsTestProject)' == 'true'">
+    <NoWarn>1701;1702;1705;CA1707;CA1806;CA2000;$(NoWarn)</NoWarn>
+    <NoWarn>IDE0001;IDE0007;$(NoWarn)</NoWarn>
+    <NoWarn>RCS1001;RCS1003;RCS1010;RCS1018;$(NoWarn)</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup Label="Testing AssemblyInfo Properties" Condition="'$(IsTestProject)' == 'true'">
+    <Compile Include="$([System.IO.Path]::Combine('$(AutoMSBuildProps)', 'AssemblyInfo_UnitTests.cs'))" Link="Properties\TestingAssemblyInfo.cs" Condition="'$(IsUnitTestProject)' == 'true'" />
+    <Compile Include="$([System.IO.Path]::Combine('$(AutoMSBuildProps)', 'AssemblyInfo_IntegrationTests.cs'))" Link="Properties\TestingAssemblyInfo.cs" Condition="'$(IsIntegrationTestProject)' == 'true'" />
+    <Compile Include="$([System.IO.Path]::Combine('$(AutoMSBuildProps)', 'AssemblyInfo_EnvironmentTests.cs'))" Link="Properties\TestingAssemblyInfo.cs" Condition="'$(IsEnvironmentTestProject)' == 'true'" />
+  </ItemGroup>
+
+  <ItemGroup Label="Dynamically Include Shared Testing Project" Condition="'$(IsTestProject)' == 'true' AND '$(MSBuildProjectName)' != 'SampleApp.Testing'">
+    <ProjectReference Include="../SampleApp.Testing/SampleApp.Testing.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="Dynamically Include Owning Project for Tests" Condition="'$(ReferenceProjectName)' != ''">
+    <ProjectReference Include="../$(ReferenceProjectName)/$(ReferenceProjectName)$(MSBuildProjectExtension)" />
+  </ItemGroup>
+
+  <ItemGroup Label="Testing NuGet Packages" Condition="'$(IsTestProject)' == 'true'">
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeCoverage" Version="16.11.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="AutoFixture" Version="4.17.0" />
+    <PackageReference Include="FluentAssertions" Version="6.1.0" />
+    <PackageReference Include="NSubstitute" Version="4.2.2" />
+  </ItemGroup>
+  
+</Project>

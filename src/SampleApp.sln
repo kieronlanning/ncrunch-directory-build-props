@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31717.71
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp.Core", "SampleApp.Core\SampleApp.Core.csproj", "{1C182999-6786-459A-9058-13E2557FFEB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{97372029-7338-4D93-A7FA-245A31A1D8F8}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{1A056BE6-457F-49BA-9A58-76FCC6D5ABB7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "msbuild", "msbuild", "{273D57D8-EC3A-4EFD-97B1-257E3831EF7A}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\ADOKJL-Solutions\umami-core\src\.build\msbuild\nuget-packable-default.props = ..\..\..\..\ADOKJL-Solutions\umami-core\src\.build\msbuild\nuget-packable-default.props
+		..\..\..\..\ADOKJL-Solutions\umami-core\src\.build\msbuild\variables.props = ..\..\..\..\ADOKJL-Solutions\umami-core\src\.build\msbuild\variables.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", "{7DDFE1A6-6582-487F-BD68-93228B2000AD}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\ADOKJL-Solutions\umami-core\src\.build\msbuild\Properties\AssemblyInfo_EnvironmentTests.cs = ..\..\..\..\ADOKJL-Solutions\umami-core\src\.build\msbuild\Properties\AssemblyInfo_EnvironmentTests.cs
+		..\..\..\..\ADOKJL-Solutions\umami-core\src\.build\msbuild\Properties\AssemblyInfo_IntegrationTests.cs = ..\..\..\..\ADOKJL-Solutions\umami-core\src\.build\msbuild\Properties\AssemblyInfo_IntegrationTests.cs
+		..\..\..\..\ADOKJL-Solutions\umami-core\src\.build\msbuild\Properties\AssemblyInfo_Shared.cs = ..\..\..\..\ADOKJL-Solutions\umami-core\src\.build\msbuild\Properties\AssemblyInfo_Shared.cs
+		..\..\..\..\ADOKJL-Solutions\umami-core\src\.build\msbuild\Properties\AssemblyInfo_UnitTests.cs = ..\..\..\..\ADOKJL-Solutions\umami-core\src\.build\msbuild\Properties\AssemblyInfo_UnitTests.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.Testing", "SampleApp.Testing\SampleApp.Testing.csproj", "{C7A59FE8-65D5-416F-B470-D5B2E6AA1D86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.Core.UnitTests", "SampleApp.Core.UnitTests\SampleApp.Core.UnitTests.csproj", "{89E4318C-E8B1-460F-B494-D5E4D175FB7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.Core.EnvironmentTests", "SampleApp.Core.EnvironmentTests\SampleApp.Core.EnvironmentTests.csproj", "{35758626-C214-4813-82CC-920F66BAC312}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.Core.IntegrationTests", "SampleApp.Core.IntegrationTests\SampleApp.Core.IntegrationTests.csproj", "{A47EAB28-5D61-4DD4-8497-9788B9582613}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C182999-6786-459A-9058-13E2557FFEB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C182999-6786-459A-9058-13E2557FFEB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C182999-6786-459A-9058-13E2557FFEB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C182999-6786-459A-9058-13E2557FFEB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7A59FE8-65D5-416F-B470-D5B2E6AA1D86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7A59FE8-65D5-416F-B470-D5B2E6AA1D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7A59FE8-65D5-416F-B470-D5B2E6AA1D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7A59FE8-65D5-416F-B470-D5B2E6AA1D86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89E4318C-E8B1-460F-B494-D5E4D175FB7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89E4318C-E8B1-460F-B494-D5E4D175FB7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89E4318C-E8B1-460F-B494-D5E4D175FB7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89E4318C-E8B1-460F-B494-D5E4D175FB7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35758626-C214-4813-82CC-920F66BAC312}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35758626-C214-4813-82CC-920F66BAC312}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35758626-C214-4813-82CC-920F66BAC312}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35758626-C214-4813-82CC-920F66BAC312}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A47EAB28-5D61-4DD4-8497-9788B9582613}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A47EAB28-5D61-4DD4-8497-9788B9582613}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A47EAB28-5D61-4DD4-8497-9788B9582613}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A47EAB28-5D61-4DD4-8497-9788B9582613}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1A056BE6-457F-49BA-9A58-76FCC6D5ABB7} = {97372029-7338-4D93-A7FA-245A31A1D8F8}
+		{273D57D8-EC3A-4EFD-97B1-257E3831EF7A} = {1A056BE6-457F-49BA-9A58-76FCC6D5ABB7}
+		{7DDFE1A6-6582-487F-BD68-93228B2000AD} = {273D57D8-EC3A-4EFD-97B1-257E3831EF7A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {377C181B-B1A7-4A7E-A45A-0DA85528410C}
+	EndGlobalSection
+EndGlobal

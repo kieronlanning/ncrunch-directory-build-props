@@ -1,0 +1,33 @@
+<Project>
+
+  <!-- Project defaults for non-test projects, Configuration Label -->
+  <PropertyGroup Label="C# Non-Test Configuration" Condition="'$(IsCSharpProject)' == 'true' AND '$(IsTestProject)' == 'false'">
+    <AssemblyName Condition="'$(AssemblyName)' == ''">$(MSBuildProjectName)</AssemblyName>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>.\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet Packaging Values" Condition="'$(IsPackable)' == 'true'">
+    <PackageTags>$(PackageTags);sample-app;</PackageTags>
+    <IncludeSymbols>true</IncludeSymbols>
+    <IncludeSource>true</IncludeSource>
+  </PropertyGroup>
+
+  <!-- Exclude any ncrunch settings and xml comment files. -->
+  <ItemGroup Label="C# File Content Options" Condition="'$(IsCSharpProject)' == 'true'">
+    <None Remove="$(MSBuildProjectName).v3.ncrunchproject" />
+    <None Remove="$(AssemblyName).xml" />
+
+    <Compile Remove="TestResults\**" />
+    <Content Remove="TestResults\**" />
+    <EmbeddedResource Remove="TestResults\**" />
+    <None Remove="TestResults\**" />
+  </ItemGroup>
+
+  <!-- Publish the documentation file on Publish. -->
+  <Target Name="_PrePublishScript" BeforeTargets="PrepareForPublish" AfterTargets="Build">
+    <Copy SourceFiles="$(DocumentationFile)" DestinationFolder="bin\$(Platform)\$(Configuration)\$(TargetFramework)\" SkipUnchangedFiles="false" />
+    <Copy SourceFiles="$(DocumentationFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="false" />
+  </Target>
+
+</Project>
