@@ -13,3 +13,5 @@ Other things of note are:
 * Testing NuGet packages are dynamically included.
 * Variables are setup and maintained for testing project.
 * As much content is in a central location as possible - this allows us to use git submodules to store the shared Directory.Build.* files.
+
+Original support request can be found at: https://forum.ncrunch.net/yaf_postst3160_Directory-Build-props-and-ReferenceProject-entries.aspx
